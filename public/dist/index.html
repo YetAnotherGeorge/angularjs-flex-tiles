@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MainApp">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+
+   <!-- FONTS -->
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Oxygen+Mono&family=Roboto+Mono&display=swap" rel="stylesheet">
+
+   <!-- STYLES -->
+   <link href="index.css" rel="stylesheet">
+
+   <!-- SCRIPTS -->
+   <script src="./lib/angularjs1.8.2/angular.js"></script>
+   <title>Control Interface</title>
+<script defer src="main.js"></script></head>
+<body style="background-color: #717171; font-family: Arial, sans-serif ">
+   <div style="position: absolute; top: 0; bottom: 26px; left: 0; right: 0; ">
+
+
+      <div class="c019-parent" id="i011" ng-controller="TransportCardsController">
+         <div class="c020-cards scrollbar-01" id="i010">
+            <!-- GENERAL CONTROLS AREA, ALWAYS VISIBLE -->
+            <div class="c022-menu scrollbar-01">
+               <span class="c025-button" ng-if="cards.filtersVisible == false" ng-click="cards.filtersVisible = true">
+                  Afiseaza Filtre
+                  <span class="material-icons c025-button-icon" style="color: rgb(0, 0, 0);">visibility</span>
+               </span>
+               <span class="c025-button" ng-if="cards.filtersVisible == true" ng-click="cards.filtersVisible = false">
+                  Ascunde Filtre
+                  <span class="material-icons c025-button-icon" style="color: rgb(0, 0, 0);">visibility_off</span>
+               </span>
+
+               <span class="c025-button" ng-if="cards.paginationVisible == false" ng-click="cards.paginationVisible = true">
+                  Afiseaza Paginare
+                  <span class="material-icons c025-button-icon" style="color: rgb(0, 0, 0);">visibility</span>
+               </span>
+               <span class="c025-button" ng-if="cards.paginationVisible == true" ng-click="cards.paginationVisible = false">
+                  Ascunde Paginare
+                  <span class="material-icons c025-button-icon" style="color: rgb(0, 0, 0);">visibility_off</span>
+               </span>
+
+               <span class="c025-button" ng-if="cards.allCollapsed == false" ng-click="cards.collapseAll(true)">
+                  Mod compact
+                  <span class="material-icons c025-button-icon" style="color: rgb(0, 0, 0);">unfold_less</span>
+               </span>
+               <span class="c025-button" ng-if="cards.allCollapsed == true" ng-click="cards.collapseAll(false)">
+                  Mod extins
+                  <span class="material-icons c025-button-icon" style="color: rgb(0, 0, 0);">unfold_more</span>
+               </span>
+
+               <div class="c025-button" ng-click="cards.addButtonClicked()">
+                  Adauga
+                  <span class="material-icons c025-button-icon" style="color: rgb(0, 0, 0);">add_circle_outline</span>
+               </div>
+               
+               <div class="c025-orderby">
+                  Sorteaza dupa
+                  <select class="c031-dropdown-select scrollbar-02" ng-model="cards.pagination.orderBy">
+                     <option value="TransportId"> Id Transport </option>
+                     <option value="SupplierId1"> Furnizor 1 (Id) </option>
+                     <option value="SupplierId2"> Furnizor 2 (Id) </option>
+                     <option value="VehicleId"> Id Vehicul </option>
+                     <option value="WoodTypeId"> Tip Material (Id) </option>
+                     <option value="ContainerId1"> Container 1 Id</option>
+                     <option value="Container1Name"> Container 1 Nume </option>
+                     <option value="ContainerId2"> Container 2 Id </option>
+                     <option value="Container2Name"> Container 2 Nume </option>
+                     <option value="TransportStatus"> Status Transport </option>
+                     <option value="VehicleStatusName"> Status Vehicul </option>
+                     <option value="TransportStartMs"> Data Pornire  </option>
+                     <option value="TransportEndMs"> Data Sosire </option>
+                     <option value="TransportPlannedStartMs"> Data Pornire (Planificat) </option>
+                     <option value="TransportPlannedEndMs"> Data Sosire (Planificat) </option>
+                     <option value="Supplier1Name"> Furnizor 1 (Nume) </option>
+                     <option value="Supplier2Name"> Furnizor 2 (Nume) </option>
+                     <option value="VehicleName"> Nume Vehicul </option>
+                     <option value="WoodType"> Tip Material</option>
+                     <option value="VehicleLat"> Pozitie Vehicul (latitudine) </option>
+                     <option value="VehicleLng"> Pozitie Vehicul (longitudine) </option>
+                     <option value="VehicleMoving"> Vehiculul se afla in miscare </option>
+                  </select>
+
+                  <select class="c031-dropdown-select scrollbar-02" ng-model="cards.pagination.orderDirection">
+                     <option value="ASC"> Crescator </option>
+                     <option value="DESC"> Descrescator </option>
+                  </select>
+               </div>
+
+               <div class="c023-hideable" ng-if="cards.filtersVisible">
+                  <div class="c021-separator-flex"></div>
+                  <!-- #region FILTERS -->
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Plecare Min</span>
+                     <input class="c028-input-date" type="date" required="" pattern="\d{4}-\d{2}-\d{2}"
+                            ng-model="cards.pagination.filter_TransportStartMs_min" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_TransportStartMs_min != null"
+                           ng-click="cards.pagination.filter_TransportStartMs_min = null">close</span>
+                  </div>
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Plecare Max</span>
+                     <input class="c028-input-date" type="date" required="" pattern="\d{4}-\d{2}-\d{2}"
+                            ng-model="cards.pagination.filter_TransportStartMs_max" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_TransportStartMs_max != null"
+                           ng-click="cards.pagination.filter_TransportStartMs_max = null">close</span>
+                  </div>
+
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Sosire Min</span>
+                     <input class="c028-input-date" type="date" required="" pattern="\d{4}-\d{2}-\d{2}"
+                            ng-model="cards.pagination.filter_TransportEndMs_min" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_TransportEndMs_min != null"
+                           ng-click="cards.pagination.filter_TransportEndMs_min = null">close</span>
+                  </div>
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Sosire Max</span>
+                     <input class="c028-input-date" type="date" required="" pattern="\d{4}-\d{2}-\d{2}"
+                            ng-model="cards.pagination.filter_TransportEndMs_max" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_TransportEndMs_max != null"
+                           ng-click="cards.pagination.filter_TransportEndMs_max = null">close</span>
+                  </div>
+
+
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Plecare (Planificat) Min</span>
+                     <input class="c028-input-date" type="date" required="" pattern="\d{4}-\d{2}-\d{2}"
+                            ng-model="cards.pagination.filter_TransportPlannedStartMs_min" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_TransportPlannedStartMs_min != null"
+                           ng-click="cards.pagination.filter_TransportPlannedStartMs_min = null">close</span>
+                  </div>
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Plecare (Planificat) Max</span>
+                     <input class="c028-input-date" type="date" required="" pattern="\d{4}-\d{2}-\d{2}"
+                            ng-model="cards.pagination.filter_TransportPlannedStartMs_max" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_TransportPlannedStartMs_max != null"
+                           ng-click="cards.pagination.filter_TransportPlannedStartMs_max = null">close</span>
+                  </div>
+
+
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Sosire (Planificat) Min</span>
+                     <input class="c028-input-date" type="date" required="" pattern="\d{4}-\d{2}-\d{2}"
+                            ng-model="cards.pagination.filter_TransportPlannedEndMs_min" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_TransportPlannedEndMs_min != null"
+                           ng-click="cards.pagination.filter_TransportPlannedEndMs_min = null">close</span>
+                  </div>
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Sosire (Planificat) Max</span>
+                     <input class="c028-input-date" type="date" required="" pattern="\d{4}-\d{2}-\d{2}"
+                            ng-model="cards.pagination.filter_TransportPlannedEndMs_max" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_TransportPlannedEndMs_max != null"
+                           ng-click="cards.pagination.filter_TransportPlannedEndMs_max = null">close</span>
+                  </div>
+
+
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Id Transport</span>
+                     <input class="c028-input-num" type="number" required=""
+                            ng-model="cards.pagination.filter_TransportId" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_TransportId != null"
+                           ng-click="cards.pagination.filter_TransportId = null">close</span>
+                  </div>
+
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Nume Container 1</span>
+                     <input class="c028-input-text" type="text" required=""
+                            ng-model="cards.pagination.filter_Container1Name" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_Container1Name != null"
+                           ng-click="cards.pagination.filter_Container1Name = null">close</span>
+                  </div>
+
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Nume Container 2</span>
+                     <input class="c028-input-text" type="text" required=""
+                            ng-model="cards.pagination.filter_Container2Name" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_Container2Name != null"
+                           ng-click="cards.pagination.filter_Container2Name = null">close</span>
+                  </div>
+
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Nume Vehicul</span>
+                     <input class="c028-input-text" type="text" required=""
+                            ng-model="cards.pagination.filter_VehicleName" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_VehicleName != null"
+                           ng-click="cards.pagination.filter_VehicleName = null">close</span>
+                  </div>
+
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Nume Furnizor 1</span>
+                     <input class="c028-input-text" type="text" required=""
+                            ng-model="cards.pagination.filter_Supplier1Name" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_Supplier1Name != null"
+                           ng-click="cards.pagination.filter_Supplier1Name = null">close</span>
+                  </div>
+                  
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Nume Furnizor 2</span>
+                     <input class="c028-input-text" type="text" required=""
+                            ng-model="cards.pagination.filter_Supplier2Name" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_Supplier2Name != null"
+                           ng-click="cards.pagination.filter_Supplier2Name = null">close</span>
+                  </div>
+
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Tip Material</span>
+                     <input class="c028-input-text" type="text" required=""
+                            ng-model="cards.pagination.filter_WoodType" />
+                     <span class="material-icons c028-input-clear"
+                           ng-if="cards.pagination.filter_WoodType != null"
+                           ng-click="cards.pagination.filter_WoodType = null">close</span>
+                  </div>
+
+
+                  <div class="c027-filter-parent">
+                     <span class="c028-filter-name">Status Transport</span>
+                     <select class="c028-input-dropdown scrollbar-02" ng-model="cards.pagination.filter_Status">
+                        <option value="1"> Planificat </option>
+                        <option value="2"> In progres </option>
+                        <option value="3"> Finalizat </option>
+                        <option value="4"> Anulat </option>
+                     </select>
+                  </div>
+                  <!-- #endregion FILTERS -->
+               </div>
+
+            </div>
+
+            <div class="c021-separator-flex"></div>
+            <!-- CARDS AREA -->
+            <div class="c022-cards">
+
+
+               <div class="c025-cards-parent scrollbar-01">
+                  <div class="c025-card"
+                       ng-repeat="tCard in cards.pagination.tca"
+                       ng-class="tCard.collapsed ? 'c025-card-compact' : 'c025-card-expanded'"
+                       ng-mouseenter="tCard.hoverStart()" ng-mouseleave="tCard.hoverEnd()"
+                       ng-click="tCard.toggleCollapse()">
+                     <!-- EXPANDED -->
+                     <span class="c025-card-tile-expanded" ng-if="!tCard.collapsed">
+                        <span class="c027-label">ID</span> {{ tCard.transportIdName }}
+                     </span>
+                     <span class="c025-card-tile-expanded" ng-if="(!tCard.collapsed && tCard.container1Name != 'Fara')">
+                        <span class="c027-label">C1</span> {{ tCard.container1Name }}
+                     </span>
+                     <span class="c025-card-tile-expanded" ng-if="(!tCard.collapsed && tCard.container2Name != 'Fara')">
+                        <span class="c027-label">C2</span> {{ tCard.container2Name }}
+                     </span>
+                     <span class="c025-card-tile-expanded"
+                           ng-if="!tCard.collapsed"
+                           ng-class="tCard.transportStatusIntSwitch({1: 'c026-status-1', 2: 'c026-status-2', 3: 'c026-status-3', 4: 'c026-status-4'}, 'c026-status-def' )">
+                        <span class="c027-label">Status</span> {{ tCard.transportStatusName }}
+                     </span>
+                     <span class="c025-card-tile-expanded" ng-if="!tCard.collapsed">
+                        <span class="c027-label">Plecare / Sosire </span> {{ tCard.startTimeString }} / {{ tCard.endTimeString }}
+                     </span>
+                     <span class="c025-card-tile-expanded" ng-if="!tCard.collapsed">
+                        <span class="c027-label">Plecare / Sosire (planificat)</span> {{ tCard.plannedStartTimeString }} / {{ tCard.plannedEndTimeString }}
+                     </span>
+
+                     <span class="c025-card-tile-expanded" ng-if="!tCard.collapsed">
+                        <span class="c027-label">Vehicul</span> {{ tCard.vehicleName }}
+                     </span>
+                     <span class="c025-card-tile-expanded" ng-if="!tCard.collapsed">
+                        <span class="c027-label">Furnizori</span> {{ tCard.supplierNames }}
+                     </span>
+                     <span class="c025-card-tile-expanded" ng-if="!tCard.collapsed">
+                        <span class="c027-label">Material</span> {{ tCard.materialName }}
+                     </span>
+
+                     <span class="c026-button"
+                           ng-if="!tCard.collapsed"
+                           ng-click="tCard.buttonClick('More'); $event.stopPropagation()"> Mai multe </span>
+
+                     <!-- COMPACT-->
+                     <span class="c025-card-tile-compact" ng-if="tCard.collapsed">
+                        <span class="c027-label">ID</span> {{ tCard.transportIdName }}
+                     </span>
+                     <span class="c025-card-tile-compact c025-status-compact"
+                           ng-if="tCard.collapsed"
+                           ng-class="tCard.transportStatusIntSwitch({1: 'c026-status-1', 2: 'c026-status-2', 3: 'c026-status-3', 4: 'c026-status-4'}, 'c026-status-def' )">
+                        <span class="c027-label">Status</span> {{ tCard.transportStatusName }}
+                     </span>
+
+                  </div>
+               </div>
+
+
+            </div>
+            <div class="c021-separator-flex"></div>
+
+            <!-- PAGINATION AREA -->
+            <div class="c022-pagination scrollbar-01"
+                 ng-if="cards.paginationVisible">
+
+               <!-- Width 25% to center page back/next buttons -->
+               <span class="c030-pagination-lr" ng-if="!cards.paginationSmall">
+                  <span class="c030-pagination-label">Goto Page: </span>
+                  <input class="c030-pagination-input" type="number" ng-model="cards.paginationGotoValue">
+                  <span class="c030-pagination-btn-2 material-icons"
+                        onclick="animationFlash(this)"
+                        ng-click="cards.gotoPage()">done</span>
+               </span>
+
+               <span class="c030-pagination-center">
+                  <span class="c030-pagination-btn c030-pagination-btn-left material-icons"
+                        onclick="animationFlash(this)"
+                        ng-click="cards.pagination.pageNumDecrement()">chevron_left</span>
+
+                  <span class="c030-pagination-page-current">
+                     {{cards.pagination.pageNum + 1}}
+                  </span>
+                  <span class="c030-pagination-btn c030-pagination-btn-right material-icons"
+                        onclick="animationFlash(this)"
+                        ng-click="cards.pagination.pageNumIncrement()">chevron_right</span>
+               </span>
+
+               <!-- Width 25% to center page back/next buttons -->
+               <span class="c030-pagination-lr" ng-if="!cards.paginationSmall">
+                  <span class="c030-pagination-label">Items Per Page: </span>
+                  <input class="c030-pagination-input" type="number" ng-model="cards.paginationItemsPerPageValue">
+                  <span class="c030-pagination-btn-2 material-icons"
+                        onclick="animationFlash(this)"
+                        ng-click="cards.changeItemsPerPage()">done</span>
+               </span>
+
+            </div>
+
+
+         </div>
+
+         <!-- RESIZE -->
+         <span class="c020-resize"
+               ng-mousedown="resize.drag()"></span>
+         <span class="c020-resize-icon material-icons"
+               ng-mousedown="resize.drag()">unfold_more</span>
+      </div>
+
+
+   </div>
+</body>
+</html>

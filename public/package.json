@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "description": "Frontend (Webpack)",
+  "name": "frontend-webpack",
+  "scripts": {
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "build:export:webpack": "webpack",
+    "build:export:tsc": "tsc --project .\\tsconfig.export.json",
+    "build:export": "npm run build:export:webpack && npm run build:export:tsc",
+    "dev": "webpack --watch"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "prettier": "^3.0.0",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.4.4",
+    "tsup": "^8.0.1",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "angularjs-ts": "file:angularjs-ts-1.0.0.tgz",
+    "source-map-loader": "^4.0.1",
+    "strict-event-emitter": "^0.5.1"
+  }
+}
