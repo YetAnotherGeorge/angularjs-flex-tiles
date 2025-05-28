@@ -1,4 +1,4 @@
-# Pagination design idea using flex twice for neat effect
+# Pagination design idea using flex twice
 
 # How to run:
 ```
