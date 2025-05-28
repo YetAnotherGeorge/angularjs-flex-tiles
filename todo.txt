@@ -1,29 +1,2 @@
-{
-    "t1.id": 1,                                // <COMPACT> [FILTER => STRING] transport id 
-    "t1.supplierid1": 3,                       // <IGNORE> 
-    "t1.supplierid2": 1,                       // <IGNORE> 
-    "t1.vehicleid": 3,                         // <IGNORE> 
-    "t1.woodtypeid": 5,                        // <IGNORE>
-    "t1.containerid1": 2,                      // <IGNORE>
-    "t1.containerid2": 41,                     // <IGNORE>
-    "c1.name": "ca2780000",                    // [FILTER => STRING] EXT CARD 
-    "c2.name": "ca2833000",                    // [FILTER => STRING] 
-    "t1.status": 3,                            // [FILTER => DROPDOWN {"Inregistrat","Planificat","In Progres","Finalizat","Anulat","?"}]
-    "t1.startstamp": "1696936009922",          // [FILTER => MIN / MAX]
-    "t1.endstamp": "1696936043125",            // [FILTER => MIN / MAX] 
-    "t1.plannedstartstamp": "1695510000000",   // [FILTER => MIN / MAX] 
-    "t1.plannedendstamp": "1694386800000",     // [FILTER => MIN / MAX] 
-    "s1.name": "PaperPorter CUI 7971076",      // supplier 1 [FILTER COMBO 1 => STRING]
-    "s2.name": "Wood Star SRL",                // supplier 2 [FILTER COMBO 1 => STRING]
-    "v1.name": "Tir 30 Tone",                  // vehicle name [FILTER => STRING]
-    "w1.name": "Hartie",                       // wood type    [FILTER => STRING]
-    "v1.lat": 44.929092,                       
-    "v1.long": 25.888515,                      
-    "v1.id": 3,                                  
-    "v1.ismoving": 1,                          // optional: do some visual queue
-    "t1.statusname": "Finalizat"               // <COMPACT>
-}
-
-
 + Vehicle is moving animation
 + Pagination pane styles
