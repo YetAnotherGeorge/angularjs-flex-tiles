@@ -89,17 +89,17 @@
 }
 
 .c020-cards {
-   position: absolute;
-   inset: 0;
-   background-color: white;
-   overflow: auto;
-   padding: 9px;
-   border-radius: 10px;
-   display: flex;
-   flex-direction: column;
-   flex-wrap: nowrap;
-   justify-content: flex-start;
-   align-items: center;
+    position: absolute;
+    inset: 0;
+    background-color: #6269bf;
+    overflow: auto;
+    padding: 9px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .c020-resize {
@@ -272,19 +272,16 @@
    background-color: #cecece;
 }
 .c025-card {
-   position: relative;
-   max-width: 500px;
-   min-height: 10px !important;
-   margin: 0px;
-   margin-right: 6px;
-   height: fit-content;
-
-   
-   
-   border-radius: 4px;
-   border: 1px solid rgb(224, 224, 224);
-   background-color: white;
-   box-shadow: 4px 4px 4px #888888;
+     position: relative;
+    max-width: 500px;
+    min-height: 10px !important;
+    margin: 0px;
+    margin-right: 6px;
+    height: fit-content;
+    border-radius: 4px;
+    border: 1px solid rgb(0 0 0);
+    background-color: #959595;
+    box-shadow: 4px 4px 4px #888888;
 }
 .c025-card-expanded {
    flex: 1 1 238px;
@@ -430,7 +427,7 @@
    user-select: none;
    border-radius: 4px;
    color: white;
-   background-color: #325D88;
+   background-color: #3d6473;
    padding: 1px 2px;
    border: 0px solid grey;
    cursor: pointer;

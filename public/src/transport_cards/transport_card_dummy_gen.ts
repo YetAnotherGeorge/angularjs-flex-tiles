@@ -41,6 +41,8 @@ function getRandomMaterialName(): string {
 
 export function generateDummyTransportCardData(count: number): TransportCardDataModel[] {
    const transports: TransportCardDataModel[] = [];
+   const timeMin_MS = 60 * 1000;
+
    for (let i = 0; i < count; i++) {
       const tc: TransportCardDataModel = {
             transportId: i + 1,
@@ -54,10 +56,12 @@ export function generateDummyTransportCardData(count: number): TransportCardData
             container2Name: `Container ${Math.floor(Math.random() * 100)}`,
             transportStatus: Math.floor(Math.random() * 5),
             vehicleStatusName: "Active",
-            transportStartMs: Date.now() - Math.floor(Math.random() * 10000000),
-            transportEndMs: Date.now() + Math.floor(Math.random() * 10000000),
-            transportPlannedStartMs: Date.now(),
-            transportPlannedEndMs: Date.now() + Math.floor(Math.random() * 10000000),
+
+            transportStartMs: Date.now() - Math.floor(Math.random() * 120 * timeMin_MS),
+            transportEndMs: Date.now() + Math.floor(Math.random() * 120 * timeMin_MS),
+            transportPlannedStartMs:  Date.now() - Math.floor(Math.random() * 120 * timeMin_MS),
+            transportPlannedEndMs: Date.now() + Math.floor(Math.random() * 120 * timeMin_MS),
+
             supplier1Name: getRandomSupplierName(),
             supplier2Name: getRandomSupplierName(),
             vehicleName: `Vehicle ${Math.floor(Math.random() * 100)}`,
