@@ -7,6 +7,7 @@ npm install;
 npm run build;
 
 cd .. # Root directory
+npm install;
 npm run dev # or simply run .\public\dist\index.html
 ```
 
