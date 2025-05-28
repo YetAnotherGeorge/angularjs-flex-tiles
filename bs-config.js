@@ -1,4 +1,3 @@
-
 /*
  |--------------------------------------------------------------------------
  | Browser-sync config file
@@ -28,7 +27,7 @@ module.exports = {
       "ignoreInitial": true
    },
    "server": false,
-   "proxy": "http://localhost:3011",
+   "proxy": "http://localhost:3080",
    "port": 3000,
    "middleware": false,
    "serveStatic": [],

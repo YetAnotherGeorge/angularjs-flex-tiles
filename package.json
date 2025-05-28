@@ -9,10 +9,11 @@
     "dist"
   ],
   "scripts": {
-    "dev:server": "ts-node-dev --files --transpile-only --respawn --inspect=4322 --project tsconfig.json .\\src\\serverMain.ts",
+    "dev": "ts-node-dev --files --transpile-only --respawn --inspect=4322 --project tsconfig.json .\\src\\serverMain.ts",
     "dev:browsersync": "delay 3.0 && browser-sync start --config bs-config.js",
-    "dev": "concurrently --kill-others-on-fail \"npm:dev:server\" \"npm:dev:browsersync\"",
+    "dev:concurrently": "concurrently --kill-others-on-fail \"npm:dev:server\" \"npm:dev:browsersync\"",
     "exportLocal": "tsup && npm pack",
+    "update": "npx npm-check-updates",
     "build": "tsc --build",
     "clean": "tsc --build --clean"
   },
@@ -20,25 +21,21 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/express": "^4.17.20",
-    "@types/node": "^20.8.9",
-    "@types/ws": "^8.5.8",
-    "@typescript-eslint/eslint-plugin": "^6.9.0",
-    "@typescript-eslint/parser": "^6.9.0",
-    "concurrently": "^8.2.2",
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.15.23",
+    "@types/ws": "^8.18.1",
+    "@typescript-eslint/eslint-plugin": "^8.33.0",
+    "@typescript-eslint/parser": "^8.33.0",
+    "concurrently": "^9.1.2",
     "delay-cli": "^2.0.0",
-    "eslint": "^8.52.0",
+    "eslint": "^9.27.0",
     "ts-node-dev": "^2.0.0",
-    "tsup": "^7.2.0",
-    "typescript": "^5.2.2"
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "i": "^0.3.7",
-    "npm": "^10.2.4",
-    "socket.io": "^4.7.2",
-    "socket.io-client": "^4.7.2",
+    "express": "^5.1.0",
     "strict-event-emitter": "^0.5.1",
-    "ws": "^8.14.2"
+    "ws": "^8.18.2"
   }
 }

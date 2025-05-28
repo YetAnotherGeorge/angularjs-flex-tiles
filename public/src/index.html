@@ -21,7 +21,6 @@
 <body style="background-color: #717171; font-family: Arial, sans-serif ">
    <div style="position: absolute; top: 0; bottom: 26px; left: 0; right: 0; ">
 
-
       <div class="c019-parent" id="i011" ng-controller="TransportCardsController">
          <div class="c020-cards scrollbar-01" id="i010">
             <!-- GENERAL CONTROLS AREA, ALWAYS VISIBLE -->
@@ -61,28 +60,28 @@
                <div class="c025-orderby">
                   Sorteaza dupa
                   <select class="c031-dropdown-select scrollbar-02" ng-model="cards.pagination.orderBy">
-                     <option value="TransportId"> Id Transport </option>
-                     <option value="SupplierId1"> Furnizor 1 (Id) </option>
-                     <option value="SupplierId2"> Furnizor 2 (Id) </option>
-                     <option value="VehicleId"> Id Vehicul </option>
-                     <option value="WoodTypeId"> Tip Material (Id) </option>
-                     <option value="ContainerId1"> Container 1 Id</option>
-                     <option value="Container1Name"> Container 1 Nume </option>
-                     <option value="ContainerId2"> Container 2 Id </option>
-                     <option value="Container2Name"> Container 2 Nume </option>
-                     <option value="TransportStatus"> Status Transport </option>
-                     <option value="VehicleStatusName"> Status Vehicul </option>
-                     <option value="TransportStartMs"> Data Pornire  </option>
-                     <option value="TransportEndMs"> Data Sosire </option>
-                     <option value="TransportPlannedStartMs"> Data Pornire (Planificat) </option>
-                     <option value="TransportPlannedEndMs"> Data Sosire (Planificat) </option>
-                     <option value="Supplier1Name"> Furnizor 1 (Nume) </option>
-                     <option value="Supplier2Name"> Furnizor 2 (Nume) </option>
-                     <option value="VehicleName"> Nume Vehicul </option>
-                     <option value="WoodType"> Tip Material</option>
-                     <option value="VehicleLat"> Pozitie Vehicul (latitudine) </option>
-                     <option value="VehicleLng"> Pozitie Vehicul (longitudine) </option>
-                     <option value="VehicleMoving"> Vehiculul se afla in miscare </option>
+                     <option value="transportId"> transportId </option>
+                     <option value="supplierId1"> supplierId1 </option>
+                     <option value="supplierId2"> supplierId2 </option>
+                     <option value="vehicleId"> vehicleId </option>
+                     <option value="woodTypeId"> woodTypeId </option>
+                     <option value="containerId1"> containerId1 </option>
+                     <option value="container1Name"> container1Name </option>
+                     <option value="containerId2"> containerId2 </option>
+                     <option value="container2Name"> container2Name </option>
+                     <option value="transportStatus"> transportStatus </option>
+                     <option value="vehicleStatusName"> vehicleStatusName </option>
+                     <option value="transportStartMs"> transportStartMs </option>
+                     <option value="transportEndMs"> transportEndMs </option>
+                     <option value="transportPlannedStartMs"> transportPlannedStartMs </option>
+                     <option value="transportPlannedEndMs"> transportPlannedEndMs </option>
+                     <option value="supplier1Name"> supplier1Name </option>
+                     <option value="supplier2Name"> supplier2Name </option>
+                     <option value="vehicleName"> vehicleName </option>
+                     <option value="materialTransported"> materialTransported </option>
+                     <option value="vehicleLat"> vehicleLat </option>
+                     <option value="vehicleLng"> vehicleLng </option>
+                     <option value="vehicleMoving"> vehicleMoving </option>
                   </select>
 
                   <select class="c031-dropdown-select scrollbar-02" ng-model="cards.pagination.orderDirection">
@@ -222,7 +221,7 @@
                   <div class="c027-filter-parent">
                      <span class="c028-filter-name">Tip Material</span>
                      <input class="c028-input-text" type="text" required=""
-                            ng-model="cards.pagination.filter_WoodType" />
+                            ng-model="cards.pagination.filter_MaterialTransported" />
                      <span class="material-icons c028-input-clear"
                            ng-if="cards.pagination.filter_WoodType != null"
                            ng-click="cards.pagination.filter_WoodType = null">close</span>
@@ -244,13 +243,12 @@
             </div>
 
             <div class="c021-separator-flex"></div>
+
             <!-- CARDS AREA -->
             <div class="c022-cards">
-
-
                <div class="c025-cards-parent scrollbar-01">
                   <div class="c025-card"
-                       ng-repeat="tCard in cards.pagination.tca"
+                       ng-repeat="tCard in cards.pagination.tcArraySlice"
                        ng-class="tCard.collapsed ? 'c025-card-compact' : 'c025-card-expanded'"
                        ng-mouseenter="tCard.hoverStart()" ng-mouseleave="tCard.hoverEnd()"
                        ng-click="tCard.toggleCollapse()">
@@ -283,7 +281,7 @@
                         <span class="c027-label">Furnizori</span> {{ tCard.supplierNames }}
                      </span>
                      <span class="c025-card-tile-expanded" ng-if="!tCard.collapsed">
-                        <span class="c027-label">Material</span> {{ tCard.materialName }}
+                        <span class="c027-label">Material</span> {{ tCard.materialTransported }}
                      </span>
 
                      <span class="c026-button"
@@ -326,7 +324,7 @@
                         ng-click="cards.pagination.pageNumDecrement()">chevron_left</span>
 
                   <span class="c030-pagination-page-current">
-                     {{cards.pagination.pageNum + 1}}
+                     {{cards.pagination.pageNum}}
                   </span>
                   <span class="c030-pagination-btn c030-pagination-btn-right material-icons"
                         onclick="animationFlash(this)"
